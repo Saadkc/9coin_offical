@@ -1,0 +1,60 @@
+%!Adobe-FontList 1.14
+%Locale:0x404
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Poppins-Medium
+FamilyName:Poppins
+StyleName:Medium
+FullName:Poppins Medium
+MenuName:Poppins Medium
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\User\Desktop\9coin-apps\Font\Poppins-Medium.ttf
+DataFormat:sfntData
+FileLength:156480
+FileModTime:1433260800
+WeightClass:500
+WidthClass:5
+AngleClass:0
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Poppins-Regular
+FamilyName:Poppins
+StyleName:Regular
+FullName:Poppins Regular
+MenuName:Poppins
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\User\Desktop\9coin-apps\Font\Poppins-Regular.ttf
+DataFormat:sfntData
+FileLength:158192
+FileModTime:1433260800
+WeightClass:400
+WidthClass:5
+AngleClass:0
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:Poppins-SemiBold
+FamilyName:Poppins
+StyleName:SemiBold
+FullName:Poppins SemiBold
+MenuName:Poppins SemiBold
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\User\Desktop\9coin-apps\Font\Poppins-SemiBold.ttf
+DataFormat:sfntData
+FileLength:155192
+FileModTime:1433260800
+WeightClass:600
+WidthClass:5
+AngleClass:0
+%EndFont
+

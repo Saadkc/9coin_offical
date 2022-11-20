@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "653999955179",
+    "project_id": "coin-fdd2e",
+    "storage_bucket": "coin-fdd2e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653999955179:android:67c825a8006640087372ae",
+        "android_client_info": {
+          "package_name": "com.example.ninecoin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "653999955179-itinkq6uj5rmfbrldk11jcfuefm3pu47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbi_RU3OlcZZ-d0tWz5_ErKP9IL535ddA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "653999955179-itinkq6uj5rmfbrldk11jcfuefm3pu47.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "653999955179-9atmdomhomc7u6tncqgrlufkhtsqpptj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ninecoin"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653999955179:android:e9924b8f457f48057372ae",
+        "android_client_info": {
+          "package_name": "com.ninecoin.evo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "653999955179-itinkq6uj5rmfbrldk11jcfuefm3pu47.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbi_RU3OlcZZ-d0tWz5_ErKP9IL535ddA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "653999955179-itinkq6uj5rmfbrldk11jcfuefm3pu47.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "653999955179-9atmdomhomc7u6tncqgrlufkhtsqpptj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ninecoin"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
