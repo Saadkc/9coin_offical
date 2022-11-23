@@ -21,9 +21,11 @@ class UserRegister {
     this.phonenumber,
     this.password,
     this.confirmPassword,
+    this.fcm,
   });
 
   final String? name;
+  final String? fcm;
   final String? email;
   final String? gender;
   final String? address;
@@ -58,5 +60,6 @@ class UserRegister {
         "confirm_password": confirmPassword,
         "qrcode": qrcode,
         "avatarphotourl": avatarphotourl,
+        "device_id": fcm
       };
 }

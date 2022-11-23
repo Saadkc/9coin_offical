@@ -30,13 +30,13 @@ Future<RegisterResponse> registerUser(
 }
 
 Future<String> loginUser(
-    {required String email, required String password}) async {
+    {required String email, required String password, required String device_id}) async {
   String url = Api.login;
   var uri = Uri.parse(url);
-  print('test' + email + password);
+
   var response = await http.post(uri,
       headers: {"Content-Type": "application/json"},
-      body: json.encode({"email": email, "password": password}));
+      body: json.encode({"email": email, "password": password,"device_id":device_id}));
 
   if (response.statusCode == 200 || response.statusCode == 201) {
     LoginResponse user = LoginResponse.fromJson(json.decode(response.body));

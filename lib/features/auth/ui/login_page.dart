@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:ninecoin/colors/colors.dart';
 import 'package:ninecoin/features/auth/ui/forgot_password_page.dart';
@@ -38,6 +39,15 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     navigatePage();
     super.initState();
+  }
+
+  String deviceTokenToSendPushNotification = "";
+
+  Future<void> getDeviceTokenToSendNotification() async {
+    final FirebaseMessaging _fcm = FirebaseMessaging.instance;
+    final token = await _fcm.getToken();
+    deviceTokenToSendPushNotification = token.toString();
+    print("Token Value $deviceTokenToSendPushNotification");
   }
 
   @override
@@ -121,10 +131,11 @@ class _LoginPageState extends State<LoginPage> {
                       const SizedBox(height: 30),
                       ElevatedButton(
                         onPressed: () {
+                          getDeviceTokenToSendNotification();
                           setState(() {
                             isLoading = true;
                           });
-                          loginUser(email: email.text, password: password.text)
+                          loginUser(email: email.text, password: password.text,device_id: deviceTokenToSendPushNotification)
                               .then((value) async {
                             setState(() {
                               isLoading = false;
