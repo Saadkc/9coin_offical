@@ -62,19 +62,14 @@ class DiscountCouponCard extends StatelessWidget {
                             color: Color(0xff70bea4),
                             fontWeight: FontWeight.bold),
                       ),
-                      const Text(
-                        '',
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: Color(0xff70bea4),
-                        ),
-                      ),
-                      SizedBox(
+                       SizedBox(
                         height: size.height * 0.01,
                       ),
+                    
+                     
                       Row(
                         children: [
-                          Text(
+                        const  Text(
                             'Point:',
                             style: TextStyle(
                               fontSize: 11,
@@ -83,7 +78,7 @@ class DiscountCouponCard extends StatelessWidget {
                           ),
                           Text(
                             promopoint,
-                            style: TextStyle(
+                            style:const TextStyle(
                               fontSize: 18,
                               color: Color(0xff70bea4),
                             ),
@@ -92,21 +87,19 @@ class DiscountCouponCard extends StatelessWidget {
                       ),
                       Text(
                         'Point: ' + originalpoint,
-                        style: TextStyle(
+                        style: const TextStyle(
                           decoration: TextDecoration.lineThrough,
                           decorationColor: Colors.red,
                           fontSize: 11,
                           color: Color(0xff70bea4),
                         ),
                       ),
-                      SizedBox(
-                        height: size.height * 0.01,
-                      ),
+                
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           const Padding(
-                            padding: const EdgeInsets.only(top: 6),
+                            padding:  EdgeInsets.only(top: 6),
                             child: Text(
                               'SAVE',
                               style: TextStyle(
