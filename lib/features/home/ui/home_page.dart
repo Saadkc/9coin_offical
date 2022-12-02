@@ -40,15 +40,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-    String deviceTokenToSendPushNotification = "";
+  String deviceTokenToSendPushNotification = "";
 
- Future<void> getDeviceTokenToSendNotification() async {
+  Future<void> getDeviceTokenToSendNotification() async {
     final FirebaseMessaging _fcm = FirebaseMessaging.instance;
     final token = await _fcm.getToken();
     deviceTokenToSendPushNotification = token.toString();
     print("Token Value $deviceTokenToSendPushNotification");
   }
-  
 
   int currentPage = 0;
   NotificationModel? notification;
@@ -59,22 +58,17 @@ class _HomePageState extends State<HomePage> {
     LuckydrawPage(),
     NewsPage(),
   ];
- 
+
 // bool _enablePullDown = true;
   @override
   void initState() {
-        FirebaseMessaging.onMessage.listen((message) { 
-  print('Firebase');
-  if(message.notification!= null){
-    print(message.notification!.title);
+    FirebaseMessaging.onMessage.listen((message) {
+      print('Firebase');
+      if (message.notification != null) {
+        print(message.notification!.title);
         print(message.notification!.body);
-                print("message.data11 ${message.data}");
-
-
-
-
-  }
-
+        print("message.data11 ${message.data}");
+      }
     });
     // TODO: implement initState
 
@@ -89,13 +83,12 @@ class _HomePageState extends State<HomePage> {
     }
     super.initState();
   }
-   RefreshController _refreshController =
+
+  RefreshController _refreshController =
       RefreshController(initialRefresh: false);
-      var _scaffoldKey = GlobalKey<ScaffoldState>(); 
+  var _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  void _onRefresh() async{
- 
-
+  void _onRefresh() async {
     // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));
     // if failed,use refreshFailed()
@@ -104,22 +97,21 @@ class _HomePageState extends State<HomePage> {
     //       // HomeScreen();
 
     // });q
-//    
+//
     Navigator.pushAndRemoveUntil(
-  context,
-  MaterialPageRoute(builder: (context) => HomePage()), // this mainpage is your page to refresh
-   (Route<dynamic> route) => false,
-);
+      context,
+      MaterialPageRoute(
+          builder: (context) =>
+              HomePage()), // this mainpage is your page to refresh
+      (Route<dynamic> route) => false,
+    );
   }
 
-  void _onLoading() async{
+  void _onLoading() async {
     // monitor network fetch
     await Future.delayed(Duration(milliseconds: 1000));
     // if failed,use loadFailed(),if no data return,use LoadNodata()
-    if(mounted)
-    setState(() {
-
-    });
+    if (mounted) setState(() {});
     _refreshController.loadComplete();
   }
 
@@ -130,7 +122,7 @@ class _HomePageState extends State<HomePage> {
         future: getNotification(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return  Scaffold(
+            return Scaffold(
               body: Center(
                 child: CircularProgressIndicator(
                   color: CoinColors.white,
@@ -152,7 +144,7 @@ class _HomePageState extends State<HomePage> {
             appBar: AppBar(
               leadingWidth: 120,
               leading: Padding(
-                padding: const EdgeInsets.only(left: 16),
+                padding: const EdgeInsets.only(left: 16, bottom: 6),
                 child: Image.asset(Assets.appLogo),
               ),
               actions: [
@@ -187,15 +179,17 @@ class _HomePageState extends State<HomePage> {
             ),
             backgroundColor: CoinColors.black12,
             body: SmartRefresher(
-              enablePullDown: true,
-              controller: _refreshController,
-              onRefresh: _onRefresh,
-              onLoading: _onLoading,
-              enablePullUp: true,
-               footer: CustomFooter(builder: (context, mode) {
-                 return HomeScreen();
-               },),              
-              child: pages[currentPage]),
+                enablePullDown: true,
+                controller: _refreshController,
+                onRefresh: _onRefresh,
+                onLoading: _onLoading,
+                enablePullUp: true,
+                footer: CustomFooter(
+                  builder: (context, mode) {
+                    return HomeScreen();
+                  },
+                ),
+                child: pages[currentPage]),
           );
         });
   }
@@ -238,7 +232,7 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 4),
           Row(
             children: [
               Expanded(
@@ -290,7 +284,7 @@ class HomeScreen extends StatelessWidget {
               )),
             ],
           ),
-          const SizedBox(height: 16),
+          //const SizedBox(height: 0),
           Column(
             children: [
               Padding(
@@ -300,8 +294,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     InkWell(
                       onTap: () {
-
-Navigator.push(context, CategoryListPage.rout());
+                        Navigator.push(context, CategoryListPage.rout());
                         // Navigator.push(context, CategoryListPage.rout());
                       },
                       child: Text("View all",
@@ -447,7 +440,5 @@ Navigator.push(context, CategoryListPage.rout());
         ],
       ),
     );
-    
   }
-  
 }

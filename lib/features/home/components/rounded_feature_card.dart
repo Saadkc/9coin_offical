@@ -87,17 +87,22 @@ class RoundedFeatureCard extends StatelessWidget {
                         children: [
                           const Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Icon(Icons.phone, size: 16.0),
+                            child: Icon(Icons.phone, size: 10.0),
                           ),
                           Text(pNumber, style: CoinTextStyle.title5),
                         ],
                       ),
+                      // SizedBox(
+                      //   height: 2,
+                      // ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        // mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Icon(Icons.location_on_rounded, size: 16.0),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 2),
+                            child: Icon(Icons.location_on_rounded, size: 12.0),
                           ),
                           Flexible(
                             child: Text(location, style: CoinTextStyle.title5),
