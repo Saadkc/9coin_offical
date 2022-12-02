@@ -142,9 +142,9 @@ class _HomePageState extends State<HomePage> {
               currentTab: currentPage,
             ),
             appBar: AppBar(
-              leadingWidth: 120,
+              leadingWidth: 80,
               leading: Padding(
-                padding: const EdgeInsets.only(left: 16, bottom: 6),
+                padding: const EdgeInsets.only(left: 0, bottom: 16, top: 8),
                 child: Image.asset(Assets.appLogo),
               ),
               actions: [
