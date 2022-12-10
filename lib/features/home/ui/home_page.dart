@@ -147,30 +147,36 @@ class _HomePageState extends State<HomePage> {
                 child: Image.asset(Assets.appLogo),
               ),
               actions: [
-                CircleIcon(
-                  onTap: () {
-                    Navigator.push(
-                        context, NotificationPage.route(notification!));
-                  },
-                  icon: Badge(
-                    padding: const EdgeInsets.all(4),
-                    position: BadgePosition.topEnd(top: -2, end: -8),
-                    badgeContent: Text(notification!.data.length.toString(),
-                        style: CoinTextStyle.title5),
-                    child: const Icon(Icons.notifications,
-                        color: CoinColors.orange, size: 20),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: CircleIcon(
+                    onTap: () {
+                      Navigator.push(
+                          context, NotificationPage.route(notification!));
+                    },
+                    icon: Badge(
+                      padding: const EdgeInsets.all(4),
+                      position: BadgePosition.topEnd(top: -2, end: -8),
+                      badgeContent: Text(notification!.data.length.toString(),
+                          style: CoinTextStyle.title5),
+                      child: const Icon(Icons.notifications,
+                          color: CoinColors.orange, size: 20),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 12.0),
-                CircleIcon(
-                  onTap: () {
-                    Navigator.push(context, ProfilePage.route());
-                  },
-                  icon: Image.asset(
-                    Assets.profileIcon,
-                    height: 20.5,
-                    width: 20.5,
-                    color: CoinColors.orange,
+                Padding(
+                  padding: const EdgeInsets.only(top: 15),
+                  child: CircleIcon(
+                    onTap: () {
+                      Navigator.push(context, ProfilePage.route());
+                    },
+                    icon: Image.asset(
+                      Assets.profileIcon,
+                      height: 20.5,
+                      width: 20.5,
+                      color: CoinColors.orange,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 16.0),

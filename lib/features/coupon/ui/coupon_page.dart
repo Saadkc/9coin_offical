@@ -101,6 +101,8 @@ class ActiveDiscountCopoun extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
+              physics: const   BouncingScrollPhysics(),
+
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 itemCount: snapshot.data?.length,
                 itemBuilder: (context, index) {
@@ -174,6 +176,7 @@ class _PurchasedDiscountCopounState extends State<PurchasedDiscountCopoun> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
+              physics: FixedExtentScrollPhysics(),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 itemCount: snapshot.data?.length,
                 itemBuilder: (context, index) {
