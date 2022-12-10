@@ -1,7 +1,12 @@
 import 'dart:developer';
+import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:http/http.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import 'package:ninecoin/colors/colors.dart';
 import 'package:ninecoin/features/home/components/my_bottom_navigation_bar.dart';
@@ -11,85 +16,122 @@ import 'package:ninecoin/utilities/dialogs/update_details_dialog.dart';
 import 'package:ninecoin/utilities/dialogs/updated_successful_dialog.dart';
 import 'package:ninecoin/widgets/drop_down_button_with_title.dart';
 import 'package:ninecoin/widgets/text_field_with_title.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/profile_circular_picture.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../services/upload_image.dart';
+
 @immutable
-class EditProfilePage extends StatelessWidget {
+class EditProfilePage extends StatefulWidget {
   static Route<EditProfilePage> route() {
     return MaterialPageRoute(builder: (context) => EditProfilePage());
   }
 
   EditProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<EditProfilePage> createState() => _EditProfilePageState();
+}
+
+class _EditProfilePageState extends State<EditProfilePage> {
+  File? _image;
+  final picker = ImagePicker();
+  bool showSpinner = false;
+
   final ValueNotifier<int> _notifier = ValueNotifier(0);
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: CoinColors.fullBlack,
       child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: const Text("Edit Profile"),
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  alignment: Alignment.center,
-                  color: CoinColors.black12,
-                  child: ProfileCircularPicture(
-                    isShowSelectImage: true,
-                    onTap: () => imagePickerFromBottom(context),
+        child: ModalProgressHUD(
+          inAsyncCall: showSpinner,
+          child: Scaffold(
+            appBar: AppBar(
+              centerTitle: true,
+              title: const Text("Edit Profile"),
+            ),
+            body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    height: 90,
+                    width: 90,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: CoinColors.black12,
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    alignment: Alignment.center,
+                    child: _image != null
+                        ? Image.file(
+                            _image!.absolute,
+                            fit: BoxFit.contain,
+                          )
+                        : ProfileCircularPicture(
+                            isShowSelectImage: true,
+                            onTap: () => imagePickerFromBottom(context),
+                          ),
                   ),
-                ),
-                const TextFieldWithTitle(
-                  title: "Name",
-                  hintText: "Tan Qing Fong",
-                ),
-                const TextFieldWithTitle(
-                  title: "Contact Number",
-                  hintText: "010 599 6883",
-                ),
-                const _InputGender(),
-                const TextFieldWithTitle(
-                  title: "Address",
-                  hintText: "No. 560, Taman University 6",
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                  child: Row(
-                    children: [
-                      _InputCity(),
-                      const SizedBox(width: 10),
-                      _InputState(),
-                    ],
+                  const TextFieldWithTitle(
+                    title: "Name",
+                    hintText: "Tan Qing Fong",
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
-                  child: Row(
-                    children: [
-                      _InputPostCode(),
-                      const SizedBox(width: 10),
-                      _InputCountry(),
-                    ],
+                  const TextFieldWithTitle(
+                    title: "Contact Number",
+                    hintText: "010 599 6883",
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                  child: ElevatedButton(
-                      onPressed: () async {
-                        if (await showUpdateDetailsDialog(context)) {
-                          await showUpdatedSuccessfulDialog(context);
-                        }
-                      },
-                      child: const Text("Update")),
-                )
-              ],
+                  const _InputGender(),
+                  const TextFieldWithTitle(
+                    title: "Address",
+                    hintText: "No. 560, Taman University 6",
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+                    child: Row(
+                      children: [
+                        _InputCity(),
+                        const SizedBox(width: 10),
+                        _InputState(),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
+                    child: Row(
+                      children: [
+                        _InputPostCode(),
+                        const SizedBox(width: 10),
+                        _InputCountry(),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                    child: ElevatedButton(
+                        onPressed: () async {
+                          setState(() {
+                            showSpinner = true;
+                          });
+                          uploadImage(_image!).then((value) {
+                            setState(() {
+                              showSpinner = false;
+                            });
+                          });
+                          if (await showUpdateDetailsDialog(context)) {
+                            await showUpdatedSuccessfulDialog(context);
+                          }
+                        },
+                        child: const Text("Update")),
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -125,7 +167,7 @@ class EditProfilePage extends StatelessWidget {
               TextButton(
                 onPressed: () async {
                   Navigator.pop(context);
-                  await pickImage();
+                  await pickImageFromGallery();
                 },
                 child: Text("Choose from Photo Album",
                     style: CoinTextStyle.title2),
@@ -137,14 +179,29 @@ class EditProfilePage extends StatelessWidget {
     );
   }
 
-  Future pickImage() async {
-    final ImagePicker picker = ImagePicker();
-    try {
-      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    } catch (e) {
-      log("Error: $e");
+  Future pickImageFromGallery() async {
+    XFile? pickedFile =
+        await picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
+    if (pickedFile != null) {
+      _image = File(pickedFile.path);
+    } else {
+      print('no image picked');
     }
+    File image = File(pickedFile!.path);
+    setState(() {
+      _image = image;
+    });
   }
+
+  // Future pickImage() async {
+  //   final ImagePicker picker = ImagePicker();
+  //   try {
+  //     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+  //   } catch (e) {
+  //     log("Error: $e");
+  //   }
+  // }
+
 }
 
 class _InputCountry extends StatefulWidget {

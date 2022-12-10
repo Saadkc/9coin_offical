@@ -20,6 +20,7 @@ class ProfileCircularPicture extends StatelessWidget {
       padding: const EdgeInsets.all(3.5),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
+        
         border: Border.all(
           color: CoinColors.orange,
           width: 1.4,
