@@ -96,13 +96,21 @@ class ActiveDiscountCopoun extends StatelessWidget {
   Coupon couponlist = Coupon();
   @override
   Widget build(BuildContext context) {
+    late double font1;
+    late double font2;
+    late double font3;
+    late double font4;
+    Size size = MediaQuery.of(context).size;
+    font1 = size.width * 1.0;
+    font2 = size.height * 0.1;
+    font3 = size.height * 0.2;
+    font4 = size.height * 0.3;
     return FutureBuilder<List>(
         future: couponlist.getCouponList(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
-              physics: const   BouncingScrollPhysics(),
-
+                physics: const BouncingScrollPhysics(),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 itemCount: snapshot.data?.length,
                 itemBuilder: (context, index) {
@@ -176,7 +184,7 @@ class _PurchasedDiscountCopounState extends State<PurchasedDiscountCopoun> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
-              physics: FixedExtentScrollPhysics(),
+                physics: FixedExtentScrollPhysics(),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 itemCount: snapshot.data?.length,
                 itemBuilder: (context, index) {

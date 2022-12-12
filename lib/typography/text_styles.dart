@@ -96,7 +96,7 @@ class CoinTextStyle {
   static TextStyle get title3Bold {
     return _baseTextStyle.copyWith(
       fontWeight: FontWeight.w700,
-      fontSize: 14.0,
+      // fontSize: 14.0,
     );
   }
 

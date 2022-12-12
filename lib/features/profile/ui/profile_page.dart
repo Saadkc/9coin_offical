@@ -17,6 +17,7 @@ import 'package:ninecoin/widgets/lucky_draw_information_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../auth/ui/change_password.dart';
+import '../services/profile_imagemodel.dart';
 
 class ProfilePage extends StatefulWidget {
   static Route<ProfilePage> route() {
@@ -46,16 +47,17 @@ class _ProfilePageState extends State<ProfilePage> {
                 future: localUser(),
                 builder: (_, AsyncSnapshot<Map?> snapshot) {
                   if (snapshot.hasData) {
-                    String imageUrl =
-                        snapshot.data!['profile_photo_url'].toString();
-                    data = snapshot.data;
+                  //  String  imageUrl = ImageGet[]
+                    // String imageUrl =
+                    //     snapshot.data!['profile_photo_url'].toString();
+                    // data = snapshot.data;
                     return Container(
                       padding: const EdgeInsets.fromLTRB(18, 16, 18, 28),
                       alignment: Alignment.centerLeft,
                       color: CoinColors.black12,
                       child: Row(
                         children: [
-                          ProfileCircularPicture(imageUrl: imageUrl),
+                          // ProfileCircularPicture(imageUrl: imageUrl),
                           Padding(
                             padding: const EdgeInsets.only(left: 24),
                             child: Column(

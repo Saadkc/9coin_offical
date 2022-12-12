@@ -27,6 +27,10 @@ class _ActiveCouponDetailsState extends State<ActiveCouponDetails> {
   late String Userid;
   late String purchasecondition = "";
   Coupon getdata = new Coupon();
+  late double font1;
+  late double font2;
+  late double font3;
+  late double font4;
 
   @override
   void initState() {
@@ -44,6 +48,12 @@ class _ActiveCouponDetailsState extends State<ActiveCouponDetails> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    font1 = size.width * 1.0;
+    font2 = size.height * 0.1;
+    font3 = size.height * 0.2;
+    font4 = size.height * 0.3;
+
     return SafeArea(
       child: FutureBuilder<List>(
         future: getdata.getString(widget.id.toString()),
@@ -75,8 +85,8 @@ class _ActiveCouponDetailsState extends State<ActiveCouponDetails> {
                         const SizedBox(height: 12),
                         Text(
                           snapshot.data![0]['title'].toString(),
-                          style: CoinTextStyle.title3Bold
-                              .copyWith(color: CoinColors.orange),
+                          style: CoinTextStyle.title3Bold.copyWith(
+                              color: CoinColors.orange, fontSize: font1),
                         ),
                         Text(snapshot.data![0]['email'].toString()),
                         Text(snapshot.data![0]['phonenumber'].toString()),
