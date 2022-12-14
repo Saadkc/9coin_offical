@@ -4,11 +4,11 @@ import 'package:ninecoin/assets/assets.dart';
 import 'package:ninecoin/colors/colors.dart';
 
 class ProfileCircularPicture extends StatelessWidget {
-  const ProfileCircularPicture({
+  const   ProfileCircularPicture({
     Key? key,
     this.onTap,
     this.imageUrl,
-    this.isShowSelectImage = false,
+    this.isShowSelectImage = false
   }) : super(key: key);
 
   final Function()? onTap;

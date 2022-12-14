@@ -43,6 +43,8 @@ class Api {
   static const _buypointpackage = "/buypointpackage";
   static const _banner = "/banner";
   static const _searchmerchant = "/SearchMerchant";
+  static const _uploadimage = "/upload_pic";
+  static const _getuserimage = "/profile_pic";
 
   static String baseUrl = "$_base$_api";
   static String login = "$_base$_api$_login";
@@ -87,4 +89,6 @@ class Api {
   static String searchmerchant = "$_base$_api$_searchmerchant";
   static String showpurchasedproductdetail =
       "$_base$_api$_showpurchasedproductdetail";
+  static String uploadimage = "$_base$_api$_uploadimage";
+  static String getuserimage = "$_base$_api$_getuserimage";
 }

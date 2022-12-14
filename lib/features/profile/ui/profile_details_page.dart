@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:ninecoin/assets/assets.dart';
 import 'package:ninecoin/colors/colors.dart';
@@ -9,43 +7,28 @@ import 'package:ninecoin/features/profile/components/edit_profile_tile.dart';
 import 'package:ninecoin/features/profile/components/profile_circular_picture.dart';
 import 'package:ninecoin/features/profile/components/profile_tile.dart';
 import 'package:ninecoin/features/profile/services/get_image.dart';
-import 'package:ninecoin/features/profile/services/profile_imagemodel.dart';
 import 'package:ninecoin/features/profile/ui/edit_profile_page.dart';
 import 'package:ninecoin/typography/text_styles.dart';
 
 class ProfileDetailsPage extends StatefulWidget {
-  static Route<ProfileDetailsPage> route(Map<dynamic, dynamic>? data) {
+  static Route<ProfileDetailsPage> route(Map<dynamic, dynamic> data,String? imageUrl) {
     return MaterialPageRoute(
-        builder: (context) => ProfileDetailsPage(data: data));
+        builder: (context) => ProfileDetailsPage(data: data,imageUrl: imageUrl!, ));
   }
 
-  Map? data;
-  ProfileDetailsPage({Key? key, required this.data}) : super(key: key);
+  final String? imageUrl;
+  final Map<dynamic,dynamic> data;
+  const ProfileDetailsPage({Key? key, required this.data, this.imageUrl }) : super(key: key);
 
   @override
   State<ProfileDetailsPage> createState() => _ProfileDetailsPageState();
 }
 
 class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
+
+
+  final Text text = Text("");
   
-  Future<ImageGet> getUserImage() async {
-     var http;
-     var responce = await http.get(Uri.parse(
-        'http://9coinapi.ap-southeast-1.elasticbeanstalk.com/api/profile_pic'));
-        // setState(() {
-        //   profileImageModel = profileImageModel.fromJson(responce[])
-        // });
-
-    if (responce.statusCode == 200) {
-
-
-        return ImageGet.fromJson(json.decode(responce.body));
-    }
-    else{
-       throw responce.body;
-    }
-
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +59,7 @@ class _ProfileDetailsPageState extends State<ProfileDetailsPage> {
             child: Column(
               children: [
                 ProfileCircularPicture(
-                  imageUrl: widget.data!['profile_photo_url'].toString(),
+                  imageUrl: widget.imageUrl != null ? widget.imageUrl : widget.data != null ? ""  : widget.data!['profile_photo_url'].toString(),
                 ),
                 const SizedBox(height: 10),
                 Text("${widget.data!['phonenumber']}",
