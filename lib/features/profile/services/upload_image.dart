@@ -8,41 +8,25 @@ import 'package:http/http.dart' as http;
 
 import '../../../config/config.dart';
 
-Future<String> uploadImage(File? image) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-    String token = prefs.getString('jwtType')! + " " + prefs.getString('jwt')!;
-
-      
-
-
-  var stream = http.ByteStream(image!.openRead());
-  stream.cast();
+Future<String> uploadImage(filepath) async {
   var url = Api.uploadimage;
-  var length = await image.length();
-  var uri = Uri.parse(url);
-  print(url);
-  var request = await http.MultipartRequest(
-    'POST',
-    uri,
-  );
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String token = prefs.getString('jwtType')! + " " + prefs.getString('jwt')!;
 
-  // Map<String, String> headers = { "Accesstoken": "access_token"};
-  print(token);
+  var request = http.MultipartRequest('POST', Uri.parse(url));
+
+  request.files.add(http.MultipartFile.fromBytes(
+      'profile_pic', File(filepath).readAsBytesSync(),
+      filename: filepath.split("/").last));
   request.headers['Authorization'] = token;
 
-  // MultipartRequest.headers.addAll(headers);
-  // MultipartRequest.files.add();
-  request.fields['profile_pic'] = "Image data";
-  var multiport = http.MultipartFile('_image', stream, length);
-  request.files.add(multiport);
-  var response = await request.send();
-
-  if (response.statusCode == 200) {
-    print("saad");
-    print(response.stream.first);
-    
-    return "Success";
+  var res = await request.send();
+  if (res.statusCode == 200) {
+    return "image uploaded sucessfully";
   } else {
-    throw "Image not upload";
+    throw "image not  uploaded sucessfully";
   }
+
 }
+
+

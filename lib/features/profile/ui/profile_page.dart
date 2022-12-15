@@ -7,7 +7,6 @@ import 'package:ninecoin/features/auth/ui/login_page.dart';
 import 'package:ninecoin/features/profile/components/profile_circular_picture.dart';
 import 'package:ninecoin/features/profile/components/profile_tile.dart';
 import 'package:ninecoin/features/profile/services/get_image.dart';
-import 'package:ninecoin/features/profile/services/get_user_image.dart';
 import 'package:ninecoin/features/profile/services/profile_imagemodel.dart';
 import 'package:ninecoin/features/profile/services/profile_service.dart';
 import 'package:ninecoin/features/profile/ui/helps_page.dart';

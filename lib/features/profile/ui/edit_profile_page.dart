@@ -18,9 +18,7 @@ import 'package:ninecoin/features/profile/services/profile_imagemodel.dart';
 import 'package:ninecoin/typography/text_styles.dart';
 import 'package:ninecoin/utilities/dialogs/update_details_dialog.dart';
 import 'package:ninecoin/utilities/dialogs/updated_successful_dialog.dart';
-import 'package:ninecoin/widgets/drop_down_button_with_title.dart';
 import 'package:ninecoin/widgets/text_field_with_title.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/profile_circular_picture.dart';
 import 'package:image_picker/image_picker.dart';
@@ -43,58 +41,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
   File? _image;
   final picker = ImagePicker();
   bool showSpinner = false;
-  // NetworkHandler networkHandler = NetworkHandler()
   final ValueNotifier<int> _notifier = ValueNotifier(0);
   ImageGet profileImageModel = ImageGet();
 
   Future<ImageGet> getUserImage() async {
-     var responce = await http.get(Uri.parse(
+    var responce = await http.get(Uri.parse(
         'http://9coinapi.ap-southeast-1.elasticbeanstalk.com/api/profile_pic'));
-        // setState(() {
-        //   profileImageModel = profileImageModel.fromJson(responce[])
-        // });
 
     if (responce.statusCode == 200) {
-
-
-        return ImageGet.fromJson(json.decode(responce.body));
+      return ImageGet.fromJson(json.decode(responce.body));
+    } else {
+      throw responce.body;
     }
-    else{
-       throw responce.body;
-    }
-
   }
-
-  //    Future<void> getUserApi() async {
-  //   final responce =
-  //       await http.get(Uri.parse('http://9coinapi.ap-southeast-1.elasticbeanstalk.com/api/profile_pic'));
-
-  //   // if (responce.statusCode == 200) {}
-  //   // var data = jsonDecode(responce.body.toString());
-
-  //   if (responce.statusCode == 200) {
-
-  //   var  data =jsonDecode(responce.body.toString());
-  //     @override
-  //     Widget build(BuildContext context) {
-  //       return Scaffold(
-  //         body: Column(children: [
-  //           Expanded(
-  //               child: FutureBuilder(
-  //             future: getUserApi(),
-  //             builder: ((context, snapshot) {
-  //               if (snapshot.connectionState == ConnectionState.waiting) {
-  //                 return Text('Loading');
-  //               } else {
-  //                 return Text(data[0]['name'].toString());
-  //               }
-  //             }),
-  //           ))
-  //         ]),
-  //       );
-  //     }
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -147,9 +106,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
                     child: Row(
-                      children: [
+                      children: const [
                         _InputCity(),
-                        const SizedBox(width: 10),
+                         SizedBox(width: 10),
                         _InputState(),
                       ],
                     ),
@@ -157,9 +116,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
                     child: Row(
-                      children: [
+                      children: const   [
                         _InputPostCode(),
-                        const SizedBox(width: 10),
+                         SizedBox(width: 10),
                         _InputCountry(),
                       ],
                     ),
@@ -171,7 +130,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           setState(() {
                             showSpinner = true;
                           });
-                          uploadImage(_image!).then((value) {
+                          uploadImage(_image!.path).then((value) {
                             setState(() {
                               showSpinner = false;
                             });
@@ -244,18 +203,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       _image = image;
     });
   }
-
-  // Future pickImage() async {
-  //   final ImagePicker picker = ImagePicker();
-  //   try {
-  //     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-  //   } catch (e) {
-  //     log("Error: $e");
-  //   }
-  // }
-
 }
-
 class _InputCountry extends StatefulWidget {
   const _InputCountry({
     Key? key,

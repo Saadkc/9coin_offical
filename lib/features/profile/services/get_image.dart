@@ -9,7 +9,6 @@ Future<ImageGet> getUserImage() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String token = prefs.getString('jwtType')! + " " + prefs.getString('jwt')!;
 
-  print(Api.getuserimage);
 
   var responce = await http.get(
       Uri.parse(

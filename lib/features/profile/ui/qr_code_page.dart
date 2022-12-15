@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ninecoin/assets/assets.dart';
-import 'package:ninecoin/colors/colors.dart';
-import 'package:ninecoin/features/home/components/my_bottom_navigation_bar.dart';
 import 'package:ninecoin/typography/text_styles.dart';
 
 class QrCodePage extends StatelessWidget {
