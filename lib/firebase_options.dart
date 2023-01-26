@@ -17,7 +17,10 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +28,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,41 +49,21 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBSR9_USNtqFzram89LI4kz5g4Rk8ZsHFA',
-    appId: '1:653999955179:web:fb7bb1eff731a7237372ae',
-    messagingSenderId: '653999955179',
-    projectId: 'coin-fdd2e',
-    authDomain: 'coin-fdd2e.firebaseapp.com',
-    storageBucket: 'coin-fdd2e.appspot.com',
-    measurementId: 'G-VTRNL59P5K',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDbi_RU3OlcZZ-d0tWz5_ErKP9IL535ddA',
-    appId: '1:653999955179:android:67c825a8006640087372ae',
-    messagingSenderId: '653999955179',
-    projectId: 'coin-fdd2e',
-    storageBucket: 'coin-fdd2e.appspot.com',
+    apiKey: 'AIzaSyA15qOXw7Z1C85-16UXZX1yYijyUuENt9Q',
+    appId: '1:239577582640:android:137d6c5d65d1a77de131f5',
+    messagingSenderId: '239577582640',
+    projectId: 'coin-3cb50',
+    storageBucket: 'coin-3cb50.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB3NkiP3SeiB6fQKkpHLkmMJdBovNbzpkw',
-    appId: '1:653999955179:ios:e1397dc30b4cce837372ae',
-    messagingSenderId: '653999955179',
-    projectId: 'coin-fdd2e',
-    storageBucket: 'coin-fdd2e.appspot.com',
-    iosClientId: '653999955179-9atmdomhomc7u6tncqgrlufkhtsqpptj.apps.googleusercontent.com',
-    iosBundleId: 'com.example.ninecoin',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyB3NkiP3SeiB6fQKkpHLkmMJdBovNbzpkw',
-    appId: '1:653999955179:ios:e1397dc30b4cce837372ae',
-    messagingSenderId: '653999955179',
-    projectId: 'coin-fdd2e',
-    storageBucket: 'coin-fdd2e.appspot.com',
-    iosClientId: '653999955179-9atmdomhomc7u6tncqgrlufkhtsqpptj.apps.googleusercontent.com',
-    iosBundleId: 'com.example.ninecoin',
+    apiKey: 'AIzaSyDLWJ4pDEJSA7EgFVNvIPlBvqLn2JoGpd8',
+    appId: '1:239577582640:ios:e50cdb23d7444c84e131f5',
+    messagingSenderId: '239577582640',
+    projectId: 'coin-3cb50',
+    storageBucket: 'coin-3cb50.appspot.com',
+    iosClientId: '239577582640-u902c7v2t3rlprsnbeth4m56s15pr2pa.apps.googleusercontent.com',
+    iosBundleId: 'com.nine.ninecoin',
   );
 }

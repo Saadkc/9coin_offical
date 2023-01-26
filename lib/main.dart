@@ -20,13 +20,13 @@ void main() async {
    WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(
-
+    name: "ninecoin",
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
   
   FirebaseMessaging messaging = FirebaseMessaging.instance;
-  NotificationSettings settings = await messaging.requestPermission(
+  await messaging.requestPermission(
   alert: true,
   announcement: false,
   badge: true,
@@ -59,9 +59,8 @@ class App extends StatelessWidget {
       theme: AppTheme.standard,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-      home: HomePage(
-        page: page,
-      ),
+      home: const LoginPage()
+      
     );
   }
 }
